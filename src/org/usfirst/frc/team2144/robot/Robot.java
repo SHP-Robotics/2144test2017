@@ -21,6 +21,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		open = new Solenoid(7);
+		close = new Solenoid(6);
 	}
 
 	/**
