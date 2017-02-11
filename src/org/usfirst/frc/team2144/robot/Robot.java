@@ -1,8 +1,9 @@
 package org.usfirst.frc.team2144.robot;
 
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -13,7 +14,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	public Solenoid open, close;
+	public Talon gearMotor;
+	public AnalogPotentiometer pot;
+	public Joystick stick;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -21,6 +24,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		gearMotor = new Talon(7);
+		pot = new AnalogPotentiometer(0);
+		stick = new Joystick(1);
 	}
 
 	/**
@@ -50,6 +56,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		gearMotor.set(stick.getY());
+		SmartDashboard.putNumber("Gear Pot", pot.get());
 	}
 
 	/**
